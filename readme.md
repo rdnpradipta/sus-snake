@@ -1,11 +1,17 @@
-# svelte-snake
+# sus-snake
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/7bc21184-8d10-43ee-8890-f801f4df4503/deploy-status)](https://app.netlify.com/sites/svelte-snake/deploys) 
+A snake game based on [ztoben's snake game](https://github.com/ztoben/svelte-snake) but with a different twist.
 
-_A snake game written with [Svelte](https://svelte.dev/)_
+A classic snake game, but what if your snake doesn't want to move the way you want to? ඞ
 
-Check out the live version [here](https://svelte-snake.netlify.com/).
+---
+## TODO
+- [ ] Implemented sus logic
+- [ ] Instruction display
+- [ ] Added pause mechanism
 
+---
 Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a>
 from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by
 <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+
