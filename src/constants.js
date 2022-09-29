@@ -8,3 +8,8 @@ export const RIGHT = 'right';
 export const LEFT = 'left';
 export const UP = 'up';
 export const DOWN = 'down';
+
+export const MIN_MOVE_BEFORE_SUS = 3;
+export const MAX_MOVE_BEFORE_SUS = 10;
+export const MAX_SUS_MOVE = 2;
+export const MVMNT_INDEX = [RIGHT, LEFT, UP, DOWN]

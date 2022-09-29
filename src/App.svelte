@@ -1,7 +1,7 @@
 <script>
 	import Snek from './Snek.svelte';
 	import Food from './Food.svelte';
-    import {BOARD_SIZE, DOWN, EMPTY_CELL, FOOD_CELL, HIGH_SCORES, LEFT, RIGHT, SNEK_CELL, UP} from './constants';
+    import {BOARD_SIZE, DOWN, EMPTY_CELL, FOOD_CELL, HIGH_SCORES, LEFT, RIGHT, SNEK_CELL, UP, MAX_MOVE_BEFORE_SUS, MIN_MOVE_BEFORE_SUS, MAX_SUS_MOVE, MVMNT_INDEX} from './constants';
 
 	let highScores;
 	let gameInterval;
@@ -10,6 +10,9 @@
 	let previousDirection;
 	let board;
 	let headPosition;
+	let moveCount = 0;
+	let susMoveReminder = 0;
+	let susTrigger = 0 ;
 
 	let snek;
 	try {
@@ -71,6 +74,8 @@
 		board = [...Array(BOARD_SIZE)].map(() => Array(BOARD_SIZE).fill(0));
 		headPosition = [0, 0];
 		snek = [];
+		susMoveReminder = 0;
+		moveCount = 0;
 
 		addSnek();
 		addFood();
@@ -110,6 +115,11 @@
 			|| (newDirection === UP && previousDirection !== DOWN)
 			|| (newDirection === DOWN && previousDirection !== UP)
 		) {
+			if (susMoveReminder <= 0) {
+				++moveCount;
+			} else {
+				moveCount = 0;
+			}
 			direction = newDirection;
 		}
 	}
@@ -130,7 +140,7 @@
 		}
 	}
 
-	window.addEventListener('keydown', function (e) {
+	function normalMove(e) {
 		if (e.key === 'ArrowRight' || e.key === 'd') {
 			return setDirection(RIGHT);
 		} else if (e.key === 'ArrowLeft' || e.key === 'a') {
@@ -140,7 +150,38 @@
 		} else if (e.key === 'ArrowDown' || e.key === 's') {
 			return setDirection(DOWN);
 		}
+	}
+
+	function susMove() {
+		let temp = Math.floor(Math.random() * (MVMNT_INDEX.length - 0) + 0);
+		return setDirection(MVMNT_INDEX.at(temp));
+
+	}
+
+	window.addEventListener('keydown', function (e) {
+		generateRandomNumberForSusTrigger();
+		checkSusMove();
+
+		if (susMoveReminder > 0) {
+			susMoveReminder--;
+			return susMove();
+		} else {
+			return normalMove(e);
+		}
 	});
+
+
+	function generateRandomNumberForSusTrigger() {
+		if (susMoveReminder === 0) {
+			susTrigger = Math.floor(Math.random() * (MAX_MOVE_BEFORE_SUS - MIN_MOVE_BEFORE_SUS + 1) + MIN_MOVE_BEFORE_SUS);
+		}
+	}
+
+	function checkSusMove() {
+		if (moveCount >= susTrigger) {
+			susMoveReminder = MAX_SUS_MOVE;
+		}
+	}
 
 	newGame();
 

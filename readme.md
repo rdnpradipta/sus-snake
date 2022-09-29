@@ -6,9 +6,12 @@ A classic snake game, but what if your snake doesn't want to move the way you wa
 
 ---
 ## TODO
-- [ ] Implemented sus logic
-- [ ] Instruction display
-- [ ] Added pause mechanism
+- [x] Implemented sus logic
+- [ ] Create Instruction 
+- [ ] Add pause mechanism
+- [ ] Improved game start/over screen
+- [ ] Added animation/indicator for death/sus move triggered
+- [ ] Should we create logic to make less random?
 
 ---
 Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a>
